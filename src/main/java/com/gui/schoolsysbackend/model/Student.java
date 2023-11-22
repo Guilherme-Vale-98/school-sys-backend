@@ -1,13 +1,15 @@
 package com.gui.schoolsysbackend.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Objects;
-import java.util.UUID;
-
+@Document(collection = "students")
 public class Student {
-
-    private UUID uuid;
+    @Id
+    private String id;
 
     private String name;
 
@@ -15,25 +17,25 @@ public class Student {
 
     private Date updatedAt;
 
-    private HashSet<Course> courses;
+    private HashMap<Course, Grade> courses;
 
     public Student() {
     }
 
-    public Student(UUID uuid, String name, Date createdAt, Date updatedAt, HashSet<Course> courses) {
-        this.uuid = uuid;
+    public Student(String id, String name, Date createdAt, Date updatedAt, HashMap<Course, Grade> courses) {
+        this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.courses = courses;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,11 +62,11 @@ public class Student {
         this.updatedAt = updatedAt;
     }
 
-    public HashSet<Course> getCourses() {
+    public HashMap<Course, Grade> getCourses() {
         return courses;
     }
 
-    public void setCourses(HashSet<Course> courses) {
+    public void setCourses(HashMap<Course, Grade> courses) {
         this.courses = courses;
     }
 
@@ -72,11 +74,11 @@ public class Student {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Student student)) return false;
-        return Objects.equals(uuid, student.uuid) && Objects.equals(name, student.name) && Objects.equals(createdAt, student.createdAt) && Objects.equals(updatedAt, student.updatedAt) && Objects.equals(courses, student.courses);
+        return Objects.equals(id, student.id) && Objects.equals(name, student.name) && Objects.equals(createdAt, student.createdAt) && Objects.equals(updatedAt, student.updatedAt) && Objects.equals(courses, student.courses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, name, createdAt, updatedAt, courses);
+        return Objects.hash(id, name, createdAt, updatedAt, courses);
     }
 }

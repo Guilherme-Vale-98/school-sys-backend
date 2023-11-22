@@ -1,11 +1,15 @@
 package com.gui.schoolsysbackend.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
+@Document(collection = "courses")
 public class Course {
-    private UUID uuid;
+    @Id
+    private String id;
 
     private String title;
 
@@ -18,20 +22,20 @@ public class Course {
     public Course() {
     }
 
-    public Course(UUID uuid, String title, CourseSituation courseSituation, String grade, Teacher teacher, Date createdAt, Date updatedAt) {
-        this.uuid = uuid;
+    public Course(String id, String title, CourseSituation courseSituation, String grade, Teacher teacher, Date createdAt, Date updatedAt) {
+        this.id = id;
         this.title = title;
         this.teacher = teacher;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -70,11 +74,11 @@ public class Course {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Course course)) return false;
-        return Objects.equals(uuid, course.uuid) && Objects.equals(title, course.title) && Objects.equals(teacher, course.teacher) && Objects.equals(createdAt, course.createdAt) && Objects.equals(updatedAt, course.updatedAt);
+        return Objects.equals(id, course.id) && Objects.equals(title, course.title) && Objects.equals(teacher, course.teacher) && Objects.equals(createdAt, course.createdAt) && Objects.equals(updatedAt, course.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, title, teacher, createdAt, updatedAt);
+        return Objects.hash(id, title, teacher, createdAt, updatedAt);
     }
 }

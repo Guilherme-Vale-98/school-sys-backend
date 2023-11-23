@@ -1,7 +1,9 @@
 package com.gui.schoolsysbackend.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Immutable;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.repository.Update;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ public class Student {
     private String id;
 
     private String name;
+
 
     private Date createdAt;
 

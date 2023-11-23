@@ -33,6 +33,10 @@ public class Student {
         this.courses = courses;
     }
 
+    public Student(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

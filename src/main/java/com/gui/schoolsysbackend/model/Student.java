@@ -18,12 +18,12 @@ public class Student {
 
     private Date updatedAt;
 
-    private HashMap<String, Grade> courses;
+    private HashMap<String, String> courses;
 
     public Student() {
     }
 
-    public Student(String id, String name, Date createdAt, Date updatedAt, HashMap<String, Grade> courses) {
+    public Student(String id, String name, Date createdAt, Date updatedAt, HashMap<String, String> courses) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
@@ -67,11 +67,11 @@ public class Student {
         this.updatedAt = updatedAt;
     }
 
-    public HashMap<String, Grade> getCourses() {
+    public HashMap<String, String> getCourses() {
         return courses;
     }
 
-    public void setCourses(HashMap<String, Grade> courses) {
+    public void setCourses(HashMap<String, String> courses) {
         this.courses = courses;
     }
 

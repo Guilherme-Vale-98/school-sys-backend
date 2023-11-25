@@ -1,5 +1,8 @@
 package com.gui.schoolsysbackend.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Grade {
     A_PLUS("A+"),
     A("A"),

@@ -17,10 +17,17 @@ public class StudentService {
         foundStudent.ifPresent(value -> {
             value.setName(student.getName());
             value.setUpdatedAt(new Date());
+            value.setCourses(student.getCourses());
             studentRepository.save(foundStudent.get());
         }
         );
 
     };
+
+    public Student saveNewStudent(Student student){
+        return studentRepository.save(student);
+    }
+
+
 
 }

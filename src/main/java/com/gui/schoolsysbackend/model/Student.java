@@ -1,9 +1,7 @@
 package com.gui.schoolsysbackend.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Immutable;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.repository.Update;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -16,16 +14,16 @@ public class Student {
     private String name;
 
 
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     private Date updatedAt;
 
-    private HashMap<Course, Grade> courses;
+    private HashMap<String, Grade> courses;
 
     public Student() {
     }
 
-    public Student(String id, String name, Date createdAt, Date updatedAt, HashMap<Course, Grade> courses) {
+    public Student(String id, String name, Date createdAt, Date updatedAt, HashMap<String, Grade> courses) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
@@ -69,11 +67,11 @@ public class Student {
         this.updatedAt = updatedAt;
     }
 
-    public HashMap<Course, Grade> getCourses() {
+    public HashMap<String, Grade> getCourses() {
         return courses;
     }
 
-    public void setCourses(HashMap<Course, Grade> courses) {
+    public void setCourses(HashMap<String, Grade> courses) {
         this.courses = courses;
     }
 

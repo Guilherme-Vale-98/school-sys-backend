@@ -1,5 +1,7 @@
 package com.gui.schoolsysbackend.bootstrap;
 
+import com.gui.schoolsysbackend.model.Course;
+import com.gui.schoolsysbackend.model.Grade;
 import com.gui.schoolsysbackend.model.Student;
 import com.gui.schoolsysbackend.repositories.StudentRepository;
 import com.gui.schoolsysbackend.services.StudentService;
@@ -8,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Date;
+import java.util.HashMap;
 
 @Configuration
 public class BootstrapData implements CommandLineRunner {
@@ -19,12 +22,15 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //studentRepository.deleteAll();
+        studentRepository.deleteAll();
+        HashMap<String, Grade> courses = new HashMap<>();
+        courses.put("Mathematics",
+                Grade.B);
 
-        Student student1 = studentRepository.findStudentByName("carlos");
+        Student student1 = new Student(null,"Luke Skywalker", new Date(), null, courses);
 
         //studentRepository.save(student1);
 
-        studentService.updateStudent(student1.getId(), new Student("carlos"));
+        studentService.saveNewStudent(student1);
     }
 }

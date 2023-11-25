@@ -28,6 +28,12 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    public Student getStudent(String name){
+        return  studentRepository.findStudentByName(name);
+    }
 
+    public void deleteStudent(String name){
+        studentRepository.delete(studentRepository.findStudentByName(name));
+    }
 
 }

@@ -32,5 +32,6 @@ public class BootstrapData implements CommandLineRunner {
         //studentRepository.save(student1);
 
         studentService.saveNewStudent(student1);
+
     }
 }

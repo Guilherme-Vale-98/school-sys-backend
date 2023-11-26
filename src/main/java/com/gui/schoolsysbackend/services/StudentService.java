@@ -6,6 +6,7 @@ import com.gui.schoolsysbackend.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
@@ -18,8 +19,7 @@ public class StudentService {
         Optional<Student> foundStudent = studentRepository.findStudentByName(name);
         foundStudent.ifPresent(value -> {
             if(enumCheck(student)){
-                System.out.println("Error invalid grade encountered" );
-                return;
+                throw new RuntimeException("Invalid enum grade");
             }
             value.setName(student.getName());
             value.setUpdatedAt(new Date());

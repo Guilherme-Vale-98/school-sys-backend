@@ -19,10 +19,7 @@ public class Course {
 
     private Date updatedAt;
 
-    public Course() {
-    }
-
-    public Course(String id, String title, CourseSituation courseSituation, String grade, Teacher teacher, Date createdAt, Date updatedAt) {
+    public Course(String id, String title, Teacher teacher, Date createdAt, Date updatedAt) {
         this.id = id;
         this.title = title;
         this.teacher = teacher;
@@ -80,5 +77,13 @@ public class Course {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, teacher, createdAt, updatedAt);
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "title='" + title + '\'' +
+                ", teacher=" + teacher.getName() +
+                '}';
     }
 }

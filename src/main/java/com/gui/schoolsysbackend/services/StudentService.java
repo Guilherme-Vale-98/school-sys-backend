@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,6 +48,10 @@ public class StudentService {
 
     public void deleteStudent(String name){
         studentRepository.delete(studentRepository.findStudentByName(name).get());
+    }
+
+    public List<Student> getAllStudents(){
+        return  studentRepository.findAll();
     }
 
 }

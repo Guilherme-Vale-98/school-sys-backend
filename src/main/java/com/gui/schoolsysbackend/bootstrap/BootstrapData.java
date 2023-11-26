@@ -24,38 +24,10 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //studentRepository.deleteAll();
-        //HashMap<String, Grade> courses = new HashMap<>();
-        //courses.put("Mathematics",
-          //      Grade.B);
+        Teacher t2 = new Teacher(null, "Ben Kenobi", new Date(), null);
+        Course cos = new Course(null, "Physics", t2, new Date(), null );
 
-        //Student student1 = new Student(null,"Luke Skywalker", new Date(), null, courses);
-
-        //studentRepository.save(student1);
-
-        //studentService.saveNewStudent(student1);
-        //Student student1 = studentService.getStudent("Luke Skywalker");
-        //student1.getCourses().replace("Mathematics", "k");
-        //studentService.updateStudent("Luke Skywalker" , student1);
-
-       // Teacher teacher1 = new Teacher(null, "Jose", null, null);
-
-/*        //Course course1 = courseService.saveNewCourse(
-               new Course(null, "History", teacher1, new Date(), null)
-       );*/
-
-        System.out.println(courseService.getCourseByTitle("History").get());
-
-        Teacher teacher2 = new Teacher(null, "Maria", null, null);
-       courseService.getCourseByTitle("History").ifPresent(
-                value -> {
-                    value.setTeacher(teacher2);
-                    courseService.updateCourse("History", value);
-                }
-
-        );
-
-        System.out.println(courseService.getCourseByTitle("History").get());
+        courseService.updateCourse("Physics", cos);
 
     }
 }

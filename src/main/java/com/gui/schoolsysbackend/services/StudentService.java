@@ -1,12 +1,13 @@
 package com.gui.schoolsysbackend.services;
 
-import com.gui.schoolsysbackend.controllers.InvalidGradeException;
 import com.gui.schoolsysbackend.controllers.NotFoundException;
 import com.gui.schoolsysbackend.model.Grade;
 import com.gui.schoolsysbackend.model.Student;
 import com.gui.schoolsysbackend.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class StudentService {
         Optional<Student> foundStudent = studentRepository.findStudentByNameIgnoreCase(name);
         foundStudent.ifPresent(value -> {
             if(enumCheck(student)){
-                throw new InvalidGradeException();
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Grade");
             }
             value.setName(student.getName());
             value.setUpdatedAt();
@@ -41,7 +42,7 @@ public class StudentService {
 
     public Student saveNewStudent(Student student){
         if (enumCheck(student)){
-            throw new InvalidGradeException();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Grade");
         }
         return studentRepository.save(student);
     }

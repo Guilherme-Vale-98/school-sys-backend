@@ -27,12 +27,7 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-/*
-        Teacher teacher = new Teacher(null, "Yoda");
-        teacher.setName("Yoda from Dagobah");
-        teacherService.updateTeacher("yoda", teacher);
 
-        System.out.println(teacherService.getAllTeachers().get(0));*/
 
     }
 }

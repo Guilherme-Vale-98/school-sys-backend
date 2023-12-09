@@ -14,7 +14,7 @@ public class Student {
     private String name;
 
 
-    private final Date createdAt = new Date();
+    private Date createdAt;
 
     private Date updatedAt;
 
@@ -27,6 +27,7 @@ public class Student {
         this.id = id;
         this.name = name;
         this.courses = courses;
+        this.createdAt = new Date();
     }
 
     public Student(String name) {

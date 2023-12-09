@@ -1,5 +1,7 @@
 package com.gui.schoolsysbackend.services;
 
+import com.gui.schoolsysbackend.controllers.InvalidGradeException;
+import com.gui.schoolsysbackend.controllers.NotFoundException;
 import com.gui.schoolsysbackend.model.Grade;
 import com.gui.schoolsysbackend.model.Student;
 import com.gui.schoolsysbackend.repositories.StudentRepository;
@@ -19,7 +21,7 @@ public class StudentService {
         Optional<Student> foundStudent = studentRepository.findStudentByNameIgnoreCase(name);
         foundStudent.ifPresent(value -> {
             if(enumCheck(student)){
-                throw new RuntimeException("Invalid enum grade");
+                throw new InvalidGradeException();
             }
             value.setName(student.getName());
             value.setUpdatedAt();
@@ -38,15 +40,18 @@ public class StudentService {
     ;
 
     public Student saveNewStudent(Student student){
+        if (enumCheck(student)){
+            throw new InvalidGradeException();
+        }
         return studentRepository.save(student);
     }
 
     public Student getStudent(String name){
-        return  studentRepository.findStudentByNameIgnoreCase(name).get();
+        return  studentRepository.findStudentByNameIgnoreCase(name).orElseThrow(NotFoundException::new);
     }
 
     public void deleteStudent(String name){
-        studentRepository.delete(studentRepository.findStudentByNameIgnoreCase(name).get());
+        studentRepository.delete(studentRepository.findStudentByNameIgnoreCase(name).orElseThrow(NotFoundException::new));
     }
 
     public List<Student> getAllStudents(){

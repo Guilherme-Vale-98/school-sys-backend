@@ -7,6 +7,7 @@ import com.gui.schoolsysbackend.model.Teacher;
 import com.gui.schoolsysbackend.repositories.StudentRepository;
 import com.gui.schoolsysbackend.services.CourseService;
 import com.gui.schoolsysbackend.services.StudentService;
+import com.gui.schoolsysbackend.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -21,13 +22,17 @@ public class BootstrapData implements CommandLineRunner {
 
     @Autowired
     CourseService courseService;
+    @Autowired
+    TeacherService teacherService;
 
     @Override
     public void run(String... args) throws Exception {
-        Teacher t2 = new Teacher(null, "Ben Kenobi", new Date(), null);
-        Course cos = new Course(null, "Physics", t2, new Date(), null );
+/*
+        Teacher teacher = new Teacher(null, "Yoda");
+        teacher.setName("Yoda from Dagobah");
+        teacherService.updateTeacher("yoda", teacher);
 
-        courseService.updateCourse("Physics", cos);
+        System.out.println(teacherService.getAllTeachers().get(0));*/
 
     }
 }

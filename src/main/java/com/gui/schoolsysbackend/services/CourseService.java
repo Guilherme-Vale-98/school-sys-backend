@@ -22,24 +22,22 @@ public class CourseService {
     }
 
     public Optional<Course> updateCourse(String title, Course course){
-        Optional<Course> foundCourse = courseRepository.findCourseByTitle(title);
-        foundCourse.ifPresent(value->{
-            value.setTitle(course.getTitle());
-            value.setTeacher(course.getTeacher());
-            value.setUpdatedAt(new Date());
-            courseRepository.save(value);
-        });
-        return foundCourse;
+        Course foundCourse = courseRepository.findCourseByTitleIgnoreCase(title).get();
+           foundCourse.setTitle(course.getTitle());
+            foundCourse.setTeacher(course.getTeacher());
+            foundCourse.setUpdatedAt(new Date());
+            courseRepository.save(foundCourse);
+        return Optional.of(foundCourse);
     }
 
     public void deleteCourse(String title){
-        if (courseRepository.findCourseByTitle(title).isPresent()){
-            courseRepository.delete(courseRepository.findCourseByTitle(title).get());
+        if (courseRepository.findCourseByTitleIgnoreCase(title).isPresent()){
+            courseRepository.delete(courseRepository.findCourseByTitleIgnoreCase(title).get());
         }
     }
 
     public Optional<Course> getCourseByTitle(String title){
-        return (courseRepository.findCourseByTitle(title));
+        return (courseRepository.findCourseByTitleIgnoreCase(title));
     }
 
     public List<Course> getAllCourses(){

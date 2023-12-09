@@ -7,5 +7,5 @@ import java.util.Optional;
 
 
 public interface StudentRepository extends MongoRepository<Student, String> {
-    Optional<Student> findStudentByName(String name);
+    Optional<Student> findStudentByNameIgnoreCase(String name);
 }

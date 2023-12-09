@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,13 +16,13 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
     public void updateStudent(String name, Student student){
-        Optional<Student> foundStudent = studentRepository.findStudentByName(name);
+        Optional<Student> foundStudent = studentRepository.findStudentByNameIgnoreCase(name);
         foundStudent.ifPresent(value -> {
             if(enumCheck(student)){
                 throw new RuntimeException("Invalid enum grade");
             }
             value.setName(student.getName());
-            value.setUpdatedAt(new Date());
+            value.setUpdatedAt();
             value.setCourses(student.getCourses());
             studentRepository.save(foundStudent.get());
         }
@@ -43,11 +42,11 @@ public class StudentService {
     }
 
     public Student getStudent(String name){
-        return  studentRepository.findStudentByName(name).get();
+        return  studentRepository.findStudentByNameIgnoreCase(name).get();
     }
 
     public void deleteStudent(String name){
-        studentRepository.delete(studentRepository.findStudentByName(name).get());
+        studentRepository.delete(studentRepository.findStudentByNameIgnoreCase(name).get());
     }
 
     public List<Student> getAllStudents(){

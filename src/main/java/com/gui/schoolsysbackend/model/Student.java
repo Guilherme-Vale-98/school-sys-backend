@@ -14,7 +14,7 @@ public class Student {
     private String name;
 
 
-    private Date createdAt = new Date();
+    private final Date createdAt = new Date();
 
     private Date updatedAt;
 
@@ -23,11 +23,9 @@ public class Student {
     public Student() {
     }
 
-    public Student(String id, String name, Date createdAt, Date updatedAt, HashMap<String, String> courses) {
+    public Student(String id, String name, HashMap<String, String> courses) {
         this.id = id;
         this.name = name;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.courses = courses;
     }
 
@@ -55,16 +53,12 @@ public class Student {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt() {
+        this.updatedAt = new Date();
     }
 
     public HashMap<String, String> getCourses() {

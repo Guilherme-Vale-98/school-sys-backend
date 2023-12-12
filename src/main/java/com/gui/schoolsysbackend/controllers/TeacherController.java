@@ -31,6 +31,4 @@ public class TeacherController {
         return teacherService.getTeacher(name);
     }
 
-
-
 }

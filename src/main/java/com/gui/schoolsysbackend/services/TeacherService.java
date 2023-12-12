@@ -16,8 +16,8 @@ public class TeacherService {
         this.teacherRepository = teacherRepository;
     }
 
-    public Optional<Teacher> getTeacher(String name){
-        return teacherRepository.findTeacherByNameIgnoreCase(name);
+    public Teacher getTeacher(String name){
+        return teacherRepository.findTeacherByNameIgnoreCase(name).orElseThrow(NotFoundException::new);
     }
     public List<Teacher> getAllTeachers(){
         return teacherRepository.findAll();

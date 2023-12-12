@@ -3,9 +3,10 @@ package com.gui.schoolsysbackend.controllers;
 import com.gui.schoolsysbackend.model.Student;
 import com.gui.schoolsysbackend.model.Teacher;
 import com.gui.schoolsysbackend.services.TeacherService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +30,17 @@ public class TeacherController {
     @GetMapping(value = TEACHER_PATH_NAME)
     public Teacher getTeacherByName(@PathVariable("teacherName") String name ){
         return teacherService.getTeacher(name);
+    }
+
+    @PostMapping(value = TEACHER_PATH)
+    public ResponseEntity handlePost(@RequestBody Teacher teacher){
+        Teacher savedTeacher = teacherService.saveNewTeacher(
+                new Teacher(null, teacher.getName())
+        );
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", TEACHER_PATH + "/" + savedTeacher.getName());
+        return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
 }

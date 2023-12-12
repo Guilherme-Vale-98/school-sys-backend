@@ -13,7 +13,7 @@ public class Teacher {
 
     private String name;
 
-    private Date createdAt = new Date();
+    private Date createdAt;
 
     private Date updatedAt;
 
@@ -24,6 +24,7 @@ public class Teacher {
     public Teacher(String id, String name) {
         this.id = id;
         this.name = name;
+        this.createdAt = new Date();
     }
 
     public String getId() {

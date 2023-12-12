@@ -1,4 +1,4 @@
-package com.gui.schoolsysbackend.controllers;
+package com.gui.schoolsysbackend.services;
 
 
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,5 @@
 package com.gui.schoolsysbackend.services;
 
-import com.gui.schoolsysbackend.controllers.NotFoundException;
 import com.gui.schoolsysbackend.model.Grade;
 import com.gui.schoolsysbackend.model.Student;
 import com.gui.schoolsysbackend.repositories.StudentRepository;

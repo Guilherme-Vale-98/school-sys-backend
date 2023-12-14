@@ -3,6 +3,7 @@ package com.gui.schoolsysbackend.controllers;
 import com.gui.schoolsysbackend.model.Student;
 import com.gui.schoolsysbackend.model.Teacher;
 import com.gui.schoolsysbackend.services.TeacherService;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,19 @@ public class TeacherController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", TEACHER_PATH + "/" + savedTeacher.getName());
         return new ResponseEntity(headers, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = TEACHER_PATH_NAME)
+    public ResponseEntity handleDeleteTeacher(@PathVariable("teacherName") String name){
+        teacherService.deleteTeacher(name);
+        return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(value = TEACHER_PATH_NAME)
+    public ResponseEntity updateTeacher(@PathVariable("teacherName") String name, @RequestBody Teacher teacher){
+        teacherService.updateTeacher(name, teacher);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

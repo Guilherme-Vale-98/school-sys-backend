@@ -21,13 +21,13 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-    public Optional<Course> updateCourse(String title, Course course){
-        Course foundCourse = courseRepository.findCourseByTitleIgnoreCase(title).get();
-           foundCourse.setTitle(course.getTitle());
-            foundCourse.setTeacher(course.getTeacher());
-            foundCourse.setUpdatedAt(new Date());
-            courseRepository.save(foundCourse);
-        return Optional.of(foundCourse);
+    public Course updateCourse(String title, Course course){
+        Course foundCourse = courseRepository.findCourseByTitleIgnoreCase(title).orElseThrow(NotFoundException::new);
+        foundCourse.setTitle(course.getTitle());
+        foundCourse.setTeacher(course.getTeacher());
+        foundCourse.setUpdatedAt(new Date());
+
+        return courseRepository.save(foundCourse);
     }
 
     public void deleteCourse(String title){
@@ -36,8 +36,8 @@ public class CourseService {
         }
     }
 
-    public Optional<Course> getCourseByTitle(String title){
-        return (courseRepository.findCourseByTitleIgnoreCase(title));
+    public Course getCourseByTitle(String title){
+        return (courseRepository.findCourseByTitleIgnoreCase(title).orElseThrow(NotFoundException::new));
     }
 
     public List<Course> getAllCourses(){

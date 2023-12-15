@@ -32,9 +32,7 @@ public class StudentController {
 
     @PostMapping(value = STUDENT_PATH)
     public ResponseEntity handlePost(@RequestBody Student student){
-        Student savedStudent = studentService.saveNewStudent(
-                student
-        );
+        Student savedStudent = studentService.saveNewStudent(student);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", STUDENT_PATH + "/" + savedStudent.getName());

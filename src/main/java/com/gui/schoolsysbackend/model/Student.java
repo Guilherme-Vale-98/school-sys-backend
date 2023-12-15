@@ -1,6 +1,8 @@
 package com.gui.schoolsysbackend.model;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -13,25 +15,19 @@ public class Student {
 
     private String name;
 
-
+    @CreatedDate
     private Date createdAt;
-
+    @LastModifiedDate
     private Date updatedAt;
 
     private HashMap<String, String> courses;
 
-    public Student() {
-    }
-
-    public Student(String id, String name, HashMap<String, String> courses) {
+    public Student(String id, String name, Date createdAt, Date updatedAt, HashMap<String, String> courses) {
         this.id = id;
         this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.courses = courses;
-        this.createdAt = new Date();
-    }
-
-    public Student(String name) {
-        this.name = name;
     }
 
     public String getId() {
@@ -53,6 +49,7 @@ public class Student {
     public Date getCreatedAt() {
         return createdAt;
     }
+
 
     public Date getUpdatedAt() {
         return updatedAt;

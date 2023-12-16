@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class StudentService {
     public void updateStudent(String name, Student student){
         Optional<Student> foundStudent = studentRepository.findStudentByNameIgnoreCase(name);
         foundStudent.ifPresent(value -> {
-            if(enumCheck(student)){
+            if(!enumCheck(student)){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Grade");
             }
             value.setName(student.getName());
@@ -33,14 +34,13 @@ public class StudentService {
     }
 
     private static boolean enumCheck(Student student) {
-        return student.getCourses().values().stream()
-                .noneMatch(grade -> Arrays.stream(Grade.values()).map(Grade::getGradeValue).toList().contains(grade));
+        return new HashSet<>(Arrays.stream(Grade.values()).map(Grade::getGradeValue).toList()).containsAll(student.getCourses().values());
     }
 
     ;
 
     public Student saveNewStudent(Student student){
-        if (enumCheck(student)){
+        if (!enumCheck(student)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Grade");
         }
         return studentRepository.save(student);

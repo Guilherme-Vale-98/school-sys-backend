@@ -35,9 +35,7 @@ public class TeacherController {
 
     @PostMapping(value = TEACHER_PATH)
     public ResponseEntity handlePost(@RequestBody Teacher teacher){
-        Teacher savedTeacher = teacherService.saveNewTeacher(
-                new Teacher(null, teacher.getName())
-        );
+        Teacher savedTeacher = teacherService.saveNewTeacher(teacher);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", TEACHER_PATH + "/" + savedTeacher.getName());

@@ -16,7 +16,7 @@ public class CourseController {
 
     private final String COURSE_PATH_TITLE = COURSE_PATH + "/{title}";
 
-    private CourseService courseService;
+    private final CourseService courseService;
 
     public CourseController(CourseService courseService){
         this.courseService = courseService;

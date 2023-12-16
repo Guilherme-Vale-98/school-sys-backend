@@ -1,6 +1,8 @@
 package com.gui.schoolsysbackend.model;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -14,9 +16,9 @@ public class Course {
     private String title;
 
     private Teacher teacher;
-
+    @CreatedDate
     private Date createdAt;
-
+    @LastModifiedDate
     private Date updatedAt;
 
     public Course(String id, String title, Teacher teacher, Date createdAt, Date updatedAt) {

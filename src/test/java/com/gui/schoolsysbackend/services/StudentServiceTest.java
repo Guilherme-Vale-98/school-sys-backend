@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,5 +87,31 @@ public class StudentServiceTest {
     }
 
 
+    @Test
+    public void getAllStudentsShouldReturnStudentsList(){
+        given(studentRepository.findAll()).willReturn(List.of(student0,student1));
 
+        List<Student> students = studentService.getAllStudents();
+
+        assertEquals(students.size(), 2);
+    }
+
+    @Test
+    public void getStudentShouldReturnStudentObject(){
+        given(studentRepository.findStudentByNameIgnoreCase("student0")).willReturn(Optional.of(student0));
+
+        Student foundStudent = studentService.getStudent("student0");
+
+        assertEquals(foundStudent.getClass(), Student.class);
+        assertEquals(foundStudent.getName(), "student0");
+
+    }
+
+    @Test
+    public void deleteStudentShouldNotThrowException(){
+        given(studentRepository.findStudentByNameIgnoreCase("student0")).willReturn(Optional.of(student0));
+
+        assertDoesNotThrow(()->studentService.deleteStudent("student0"));
+
+    }
 }

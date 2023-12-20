@@ -62,6 +62,29 @@ public class StudentServiceTest {
     public void saveNewStudentInvalidGradeTest(){
         assertThrows(ResponseStatusException.class, () -> studentService.saveNewStudent(student1));
     }
+    @Test
+    public void updateStudentShouldNotThrowAnyException(){
+        given(studentRepository.findStudentByNameIgnoreCase("STUDENT0")).willReturn(Optional.of(student0));
+        HashMap<String, String> dummyCourses = new HashMap<>();
+        dummyCourses.put("DummyCourse0", "B");
+        dummyCourses.put("DummyCourse1", "A");
+
+
+        Student updatedStudent = new Student(null, "updated", null, null, dummyCourses);
+        assertDoesNotThrow(()-> studentService.updateStudent("STUDENT0", updatedStudent));
+
+    }
+    @Test
+    public void GivenInvalidGradesUpdateStudentShouldThrowResponseStatusException(){
+        given(studentRepository.findStudentByNameIgnoreCase("STUDENT0")).willReturn(Optional.of(student0));
+        HashMap<String, String> dummyCourses = new HashMap<>();
+        dummyCourses.put("DummyCourse0", "B");
+        dummyCourses.put("DummyCourse1", "X");
+
+        Student updatedStudent = new Student(null, "updated", null, null, dummyCourses);
+        assertThrows(ResponseStatusException.class,()-> studentService.updateStudent("STUDENT0", updatedStudent));
+    }
+
 
 
 }
